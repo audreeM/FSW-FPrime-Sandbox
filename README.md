@@ -41,7 +41,8 @@ The script is idempotent — running it twice is harmless.
 ### Fetch the Zephyr workspace
 
 `lib/zephyr-workspace/` is roughly 9 GB and is therefore not committed. `west` reconstructs
-it from `west.yml`:
+it from `west.yml`, which pins Zephyr and every module to exact commits, so this produces
+the same tree the deployment was built and tested against:
 
 ```bash
 python3 -m venv fprime-venv
@@ -128,6 +129,16 @@ F´ actually uses.
 
 The topology also omits the `DataProducts` and `FileHandling` subtopologies (apart from
 `prmDb`, which backs the topology's parameter connections), since neither is used here.
+
+### Zephyr revision
+
+`west.yml` pins Zephyr to commit `5a5e6c5b3cb9` (`v4.4.0-15270-g5a5e6c5b3cb`) rather than
+to a release tag. Zephyr 4.4 changed `uart_irq_update()` from returning `int` to returning
+`void`, and `patches/0002` adapts the fprime-zephyr UART driver to that signature. That
+patch does not apply to Zephyr 4.3, so changing this pin means revisiting the patch.
+
+Module revisions are imported from Zephyr's own manifest rather than pinned separately,
+which keeps them consistent with whichever Zephyr revision is selected.
 
 ## Branches
 
