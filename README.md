@@ -48,13 +48,21 @@ the same tree the deployment was built and tested against:
 python3 -m venv fprime-venv
 source fprime-venv/bin/activate
 pip install -r requirements.txt
+
+# `.west/` is not committed either, so create the workspace against the
+# in-tree manifest before updating. Only needed once.
+west init -l .
 west update
 ```
 
 ## Build
 
+Generate the build cache once, then build. The board comes from
+`default_cmake_options` in `settings.ini`, so no `-DBOARD=` is needed:
+
 ```bash
 source fprime-venv/bin/activate
+fprime-util generate zephyr   # once, or after changing settings.ini
 fprime-util build zephyr
 ```
 
