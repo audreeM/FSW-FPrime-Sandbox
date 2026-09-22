@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
 #include "Fw/Test/UnitTest.hpp"
-#include "STest/Random/Random.hpp"
 #include "MAX17205Tester.hpp"
+#include "STest/Random/Random.hpp"
 
 TEST(MAX17205, DecodesLittleEndianSignedCurrent) {
     COMMENT("Verify little-endian signed current decoding.");

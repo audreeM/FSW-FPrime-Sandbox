@@ -2,8 +2,7 @@
 
 namespace project {
 
-MAX17205Tester::MAX17205Tester()
-    : MAX17205GTestBase("MAX17205Tester", MAX_HISTORY_SIZE), component("MAX17205") {
+MAX17205Tester::MAX17205Tester() : MAX17205GTestBase("MAX17205Tester", MAX_HISTORY_SIZE), component("MAX17205") {
     this->initComponents();
     this->connectPorts();
 }
@@ -57,9 +56,9 @@ U16 MAX17205Tester::valueForRegister(U8 address, U8 reg) {
 }
 
 Drv::I2cStatus MAX17205Tester::from_busWriteRead_handler(FwIndexType portNum,
-                                                           U32 address,
-                                                           Fw::Buffer& writeBuffer,
-                                                           Fw::Buffer& readBuffer) {
+                                                         U32 address,
+                                                         Fw::Buffer& writeBuffer,
+                                                         Fw::Buffer& readBuffer) {
     // Record the transaction before responding, allowing the test to inspect
     // the requested address and register through the generated history.
     ++m_readCount;

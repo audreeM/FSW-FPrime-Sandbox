@@ -28,12 +28,10 @@ class MAX17205Tester final : public MAX17205GTestBase {
 
     // Fake synchronous bus handlers used by the component's output ports.
     Drv::I2cStatus from_busWriteRead_handler(FwIndexType portNum,
-                                              U32 address,
-                                              Fw::Buffer& writeBuffer,
-                          Fw::Buffer& readBuffer) override;
-    Drv::I2cStatus from_busWrite_handler(FwIndexType portNum,
-                                          U32 address,
-                        Fw::Buffer& buffer) override;
+                                             U32 address,
+                                             Fw::Buffer& writeBuffer,
+                                             Fw::Buffer& readBuffer) override;
+    Drv::I2cStatus from_busWrite_handler(FwIndexType portNum, U32 address, Fw::Buffer& buffer) override;
 
     // Return deterministic raw register data for the mocked fuel gauge.
     static U16 valueForRegister(U8 address, U8 reg);
